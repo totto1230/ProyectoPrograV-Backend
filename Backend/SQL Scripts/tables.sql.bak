@@ -1,0 +1,13 @@
+---TABLES
+-- USERS
+
+CREATE TABLE dbo.Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Number VARCHAR(255) NOT NULL,
+	Email VARCHAR(255),
+	Password VARCHAR(255) NOT NULL,
+	TypeU char NOT NULL,
+    Status BIT NOT NULL
+);
+
