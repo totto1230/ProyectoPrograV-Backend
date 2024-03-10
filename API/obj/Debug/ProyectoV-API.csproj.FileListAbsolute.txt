@@ -96,3 +96,15 @@ D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyecto\foroPrograVEstudiantes\API\obj\D
 D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyecto\foroPrograVEstudiantes\API\obj\Debug\ProyectoV-API.csproj.CopyComplete
 D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyecto\foroPrograVEstudiantes\API\obj\Debug\API.dll
 D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyecto\foroPrograVEstudiantes\API\obj\Debug\API.pdb
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\API.dll.config
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\API.dll
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\API.pdb
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\ForoULAtina.dll
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\Newtonsoft.Json.dll
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\ForoULAtina.pdb
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\bin\ForoULAtina.dll.config
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.AssemblyReference.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.CoreCompileInputs.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.CopyComplete
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\API.dll
+D:\ULATINA\10 CUATRI\Progra V\Proyecto\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\API.pdb
