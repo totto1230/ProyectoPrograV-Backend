@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GeoJSON.Net, Version=1.2.16.0, Culture=neutral, PublicKeyToken=42c00ea87f5f14d4, processorArchitecture=MSIL">
+      <HintPath>packages\GeoJSON.Net.1.2.19\lib\net45\GeoJSON.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
@@ -50,13 +56,17 @@
       <DependentUpon>LinQAzure.dbml</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Entities\Login.cs" />
+    <Compile Include="Entidades\Entities\Orden.cs" />
     <Compile Include="Entidades\Entities\User.cs" />
     <Compile Include="Entidades\Request\RequestLogin.cs" />
+    <Compile Include="Entidades\Request\RequestOrden.cs" />
     <Compile Include="Entidades\Request\RequestRegistation.cs" />
     <Compile Include="Entidades\Response\ResponseBase.cs" />
     <Compile Include="Entidades\Response\ResponseLogin.cs" />
+    <Compile Include="Entidades\Response\ResponseOrder.cs" />
     <Compile Include="Entidades\Response\ResponseRegistration.cs" />
     <Compile Include="Logica\LogicLogin.cs" />
+    <Compile Include="Logica\LogicOrder.cs" />
     <Compile Include="Logica\LogicRegistrationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -80,6 +90,8 @@
     <None Include="AccesoDatos\LinQAzure.dbml.layout">
       <DependentUpon>LinQAzure.dbml</DependentUpon>
     </None>
+    <None Include="output.geojson" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
