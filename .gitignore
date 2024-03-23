@@ -5,3 +5,14 @@
 /Backend/.gitignore
 /API/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /API/obj/Debug/ProyectoV-API.csproj.AssemblyReference.cache
+/API/bin/API.dll
+/API/bin/API.pdb
+/API/bin/ForoULAtina.dll
+/API/bin/ForoULAtina.pdb
+/API/obj/Debug/API.dll
+/API/obj/Debug/ProyectoV-API.csproj.FileListAbsolute.txt
+/API/obj/Debug/ProyectoV-API.csproj.AssemblyReference.cache
+/API/obj/Debug/ProyectoV-API.csproj.CoreCompileInputs.cache
+/API/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/API/obj/Debug/API.pdb
+/.gitignore
