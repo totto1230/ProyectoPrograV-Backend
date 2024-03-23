@@ -120,3 +120,15 @@ D:\ULATINA\10 CUATRI\Progra V\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\Pr
 D:\ULATINA\10 CUATRI\Progra V\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.CopyComplete
 D:\ULATINA\10 CUATRI\Progra V\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\API.dll
 D:\ULATINA\10 CUATRI\Progra V\Proyectoo\ProyectoPrograV-Backend\API\obj\Debug\API.pdb
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\API.dll.config
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\API.dll
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\API.pdb
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\ForoULAtina.dll
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\Newtonsoft.Json.dll
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\ForoULAtina.pdb
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\bin\ForoULAtina.dll.config
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.AssemblyReference.cache
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.CoreCompileInputs.cache
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\obj\Debug\ProyectoV-API.csproj.CopyComplete
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\obj\Debug\API.dll
+C:\Users\josep\Desktop\data\Ulatina\PROGRA V\Proyecto\ProyectoPrograV-Backend\API\obj\Debug\API.pdb

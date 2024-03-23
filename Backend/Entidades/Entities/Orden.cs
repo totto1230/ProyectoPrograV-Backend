@@ -20,6 +20,8 @@ namespace ForoULAtina.Entidades.Entities
 
         public DateTime expiration { get; set;}
 
+        //AGREGAR COORDENADAS
+        //BACKEND
         public double totalComprar {get; set;}
     }
 }

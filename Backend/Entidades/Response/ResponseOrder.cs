@@ -12,6 +12,6 @@ namespace ForoULAtina.Entidades.Response
 
         public Boolean Valid { get; set; }
 
-        public int idProducto { get; set; }
+        //public int idProducto { get; set; }
     }
 }

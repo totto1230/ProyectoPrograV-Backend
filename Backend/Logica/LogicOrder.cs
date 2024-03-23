@@ -31,6 +31,7 @@ namespace ForoULAtina.Logica
                 }
                 else
                 {
+                    //validar number
                     if (string.IsNullOrEmpty(req.order.Numero))
                     {
                         res.Result = false;
