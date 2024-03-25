@@ -83,4 +83,14 @@
     <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.retornar_productos_disponibles" Method="retornar_productos_disponibles">
+    <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="retornar_productos_disponiblesResult">
+      <Column Name="idProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Decimal(6,3) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

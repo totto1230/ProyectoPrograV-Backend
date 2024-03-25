@@ -333,3 +333,30 @@ BEGIN
     SET @errorIdDB = ERROR_NUMBER();
     SET @ErrorFromDB = ERROR_MESSAGE();
 END 
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+CREATE PROCEDURE retornar_productos_disponibles
+(
+	 @errorIdDB int output,
+	 @ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    -- Insert statements for procedure here
+    SELECT idProducto, Name, Cantidad, Precio from Productos where Cantidad>0;
+END
+GO

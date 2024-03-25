@@ -141,6 +141,15 @@ namespace ForoULAtina.AccesoDatos
 			errorFromDB = ((string)(result.GetParameterValue(6)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.retornar_productos_disponibles")]
+		public ISingleResult<retornar_productos_disponiblesResult> retornar_productos_disponibles([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorIdDB, errorFromDB);
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(0)));
+			errorFromDB = ((string)(result.GetParameterValue(1)));
+			return ((ISingleResult<retornar_productos_disponiblesResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class order_validate_numberResult
@@ -272,6 +281,86 @@ namespace ForoULAtina.AccesoDatos
 				if ((this._Status != value))
 				{
 					this._Status = value;
+				}
+			}
+		}
+	}
+	
+	public partial class retornar_productos_disponiblesResult
+	{
+		
+		private int _idProducto;
+		
+		private string _Name;
+		
+		private int _Cantidad;
+		
+		private decimal _Precio;
+		
+		public retornar_productos_disponiblesResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idProducto", DbType="Int NOT NULL")]
+		public int idProducto
+		{
+			get
+			{
+				return this._idProducto;
+			}
+			set
+			{
+				if ((this._idProducto != value))
+				{
+					this._idProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Int NOT NULL")]
+		public int Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this._Cantidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Precio", DbType="Decimal(6,3) NOT NULL")]
+		public decimal Precio
+		{
+			get
+			{
+				return this._Precio;
+			}
+			set
+			{
+				if ((this._Precio != value))
+				{
+					this._Precio = value;
 				}
 			}
 		}
