@@ -8,6 +8,5 @@ namespace ForoULAtina.Entidades.Response
 {
     public class ResponseRegistration : ResponseBase
     {
-        public int? Id { get; set; } 
     }
 }

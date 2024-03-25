@@ -11,10 +11,12 @@ using GeoJSON.Net.Geometry;
 using GeoJSON.Net;
 using ForoULAtina.AccesoDatos;
 using System.Runtime.Remoting.Messaging;
+using ForoULAtina.Entidades.Entities;
+
 
 namespace ForoULAtina.Logica
 {
-    public class LogicOrder
+    public class LogicOrder 
     {
         public ResponseOrder ValidateOrder (RequestOrden req)
         {
@@ -24,6 +26,15 @@ namespace ForoULAtina.Logica
             {
                 res.Result = false;
                 res.Errors = new List<string>();
+                int cantidadProductos = req.order.IdProducto.Length;
+                int? errorIdDB = 0;
+                int i = 0;
+                int[] idsBackend = new int[cantidadProductos];
+                string ErrorFromDB = "";
+                bool? existe = false;
+                decimal? totalComprar = 0;
+                IdProductos ids = new IdProductos();
+                DataClasses1DataContext connect = new DataClasses1DataContext();
 
                 if (req == null)
                 {
@@ -36,79 +47,105 @@ namespace ForoULAtina.Logica
                     {
                         res.Result = false;
                         res.Errors.Add("PLEASE ENTER YOUR NUMBER! - NO NUMBER ERROR");
-                        res.Message = "PLEASE ENTER YOUR NUMBER! - NO NUMBER ERROR";
-                    }
-
-                    if (req.order.Cantidad == 0)
-                    {
-                        res.Result = false;
-                        res.Errors.Add("PLEASE ENTER A CANTITY! - NO CANTITY ERROR");
-                        res.Message = "PLEASE ENTER A CANTITY! - NO CANTITY ERROR";
-                    }
-
-                    if (req.order.IdProducto == 0)
-                    {
-                        res.Result = false;
-                        res.Errors.Add("NO ID ERROR");
-                        res.Message = "NO ID ERROR";
-                    }
-                }
-
-                if (res.Errors.Any())
-                {
-                    res.Result = false;
-                }
-                else
-                {
-                    DataClasses1DataContext connect = new DataClasses1DataContext();
-                    string numberOut = "";
-                    int? errorIdDB = 0;
-                    string ErrorFromDB = "";
-                    bool? existe = false;
-
-                    connect.order_validate_number(req.order.Numero, ref numberOut , ref errorIdDB , ref  ErrorFromDB);
-
-                    if (string.IsNullOrEmpty(ErrorFromDB))
-                    {
-                        connect.order_validate_product(req.order.IdProducto, req.order.Cantidad, ref existe, ref errorIdDB, ref ErrorFromDB);
-
-                    }
-
-                    if (existe == false)
-                    {
-                        res.Errors.Add("ERROR, PRODUCTO NO EXISTE");
-                        res.Message = "ERROR, PRODUCTO NO EXISTE";
-                    }
-                    else if (string.IsNullOrEmpty(ErrorFromDB))
-                    {
-                        bool? validarComprar = false;
-                        connect.order_validate_compra(req.order.NumeroTar, req.order.code, req.order.expiration, (decimal) req.order.totalComprar, ref validarComprar , ref errorIdDB , ref ErrorFromDB);
-
-                        if (validarComprar == true)
-                        {
-                            
-                            connect.actualizar_inventario(req.order.NumeroTar, req.order.code, req.order.expiration, (decimal)req.order.totalComprar, req.order.Cantidad, req.order.IdProducto, ref errorIdDB, ref ErrorFromDB);
-
-                            if(string.IsNullOrEmpty(ErrorFromDB)){
-                                res.Result = true;
-                                res.Valid = true;
-                            }
-
-                        }
-                        else
-                        {
-                            res.Errors.Add(ErrorFromDB);
-                            res.Result = false;
-                        }
 
                     }
                     else
                     {
-                        res.Errors.Add(ErrorFromDB);
-                        res.Result = false;
+                        //VALIDAR NUM
+                        connect.order_validate_number(req.order.Numero, ref errorIdDB, ref ErrorFromDB);
+
+                        if (errorIdDB != 0)
+                        {
+                            res.Errors.Add("NUMBER DOESNT EXISTS! - BAD NUMBER ERROR -- " + ErrorFromDB + " -- " + errorIdDB.ToString());
+                        }
+                        else
+                        {
+                            //VALIDAR PRODUCTO
+                            while (i < cantidadProductos)
+                            {
+                                if (req.order.Cantidad[i] == 0)
+                                {
+                                    res.Result = false;
+                                    res.Errors.Add("PLEASE ENTER A CANTITY! - NO CANTITY ERROR");
+                                }
+
+                                if (req.order.IdProducto[i] == 0)
+                                {
+                                    res.Result = false;
+                                    res.Errors.Add("NO ID ERROR");
+                                }
+                                else
+                                {
+                                    int idBackend = ids.matchIDs(req.order.IdProducto[i]);
+                                    idsBackend[i] = idBackend;
+                                    decimal? precio = 0;
+                                    connect.order_validate_product(idBackend, req.order.Cantidad[i], ref existe, ref errorIdDB, ref precio, ref ErrorFromDB);
+
+                                    if (existe == false)
+                                    {
+                                        res.Result = false;
+                                        res.Errors.Add("PRODUCT DOESNOT EXISTS - NO PRODUCT ERROR " + "REF ID: " + req.order.IdProducto[i] + ErrorFromDB);
+
+                                    }
+                                    else
+                                    {
+                                        totalComprar = totalComprar + (precio * req.order.Cantidad[i]);
+                                    }
+                                }
+
+                                i++;
+                            }
+
+                            if (totalComprar == 0)
+                            {
+                                res.Result = false;
+                                res.Errors.Add("SOMETHING WENT WRONG WHILE REVIEWING THE ORDER");
+                            }
+                            else
+                            {
+                                bool? validarComprar = false;
+                                connect.order_validate_compra(req.order.NumeroTar, req.order.code, req.order.expiration, totalComprar, ref validarComprar, ref errorIdDB, ref ErrorFromDB);
+
+                                if (validarComprar == false)
+                                {
+                                    res.Result = false;
+                                    res.Errors.Add("SOMETHING WENT WRONG WHILE REVIEWING THE ORDER --" + ErrorFromDB);
+                                }
+                                else
+                                {
+                                    connect.actualizar_tarjeta(req.order.NumeroTar, req.order.code, req.order.expiration, totalComprar, ref errorIdDB, ref ErrorFromDB);
+
+                                    if (string.IsNullOrEmpty(ErrorFromDB))
+                                    {
+                                        int j = 0;
+                                        while (j < cantidadProductos)
+                                        {
+                                            connect.actualizar_inventario(req.order.Cantidad[j], idsBackend[j], ref errorIdDB, ref ErrorFromDB);
+
+                                            j++;
+                                        }
+
+                                        if (string.IsNullOrEmpty(ErrorFromDB))
+                                        {
+                                            int? idOrden = 0;
+                                            connect.crear_orden(req.order.Numero, req.order.IdProducto.ToString(), req.order.Cantidad.ToString(), req.order.coordenadas.ToString(), (double?)totalComprar, true, ref idOrden,ref  errorIdDB, ref ErrorFromDB);
+
+                                            if (string.IsNullOrEmpty(ErrorFromDB))
+                                            {
+                                                res.Result = true;
+                                                res.Message = "ORDER PLACED SUCCESSFULLY!" + " If you have any issues, please provide us your order ID: " + (idOrden+35555).ToString();
+                                            }
+
+                                        }
+                                     }
+
+
+                                }
+                            }
+
+                        }
                     }
                 }
-
             }
             catch (Exception ex)
             {

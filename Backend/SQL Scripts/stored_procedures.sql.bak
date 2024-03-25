@@ -110,11 +110,11 @@ BEGIN
 	SET @ErrorFromDB = '';
 
     -- Insert statements for procedure here
-    SELECT Number --, @Status = Status
+    SELECT Number = @Number --, @Status = Status
 	FROM Users 
 	WHERE Number = @Number AND Status = 1;
 
-	IF @@ROWCOUNT > 0
+	IF @@ROWCOUNT = 0
     BEGIN
         SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
 		SET @ErrorFromDB = 'No user found with the provided number.';
@@ -224,7 +224,7 @@ BEGIN
         SET @ErrorFromDB = ERROR_MESSAGE();
     END
 END
-GO
+/****** Object:  StoredProcedure [dbo].[actualizar_inventario]    Script Date: 3/23/2024 3:26:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -234,12 +234,8 @@ GO
 -- Create Date: <Create Date, , >
 -- Description: <Description, , >
 -- =============================================
-CREATE PROCEDURE actualizar_inventario
+ALTER PROCEDURE [dbo].[actualizar_inventario]
 (
-    @numero VARCHAR(255),
-    @code VARCHAR(4),
-    @expiration DATE,
-    @totalComprar DECIMAL(18, 2),
     @cantidadProductos INT,
     @IdProducto INT,
     @errorIdDB INT OUTPUT,
@@ -256,6 +252,40 @@ BEGIN
         UPDATE Productos
         SET Cantidad = (Cantidad - @cantidadProductos)
         WHERE IdProducto = @IdProducto;
+    END TRY
+    BEGIN CATCH
+        -- Capture error information
+        SET @errorIdDB = ERROR_NUMBER();
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END CATCH;
+END
+
+/****** Object:  StoredProcedure [dbo].[actualizar_inventario]    Script Date: 3/23/2024 3:26:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+Create PROCEDURE [dbo].[actualizar_tarjeta]
+(
+    @numero VARCHAR(255),
+    @code VARCHAR(4),
+    @expiration DATE,
+    @totalComprar DECIMAL(18, 2),
+    @errorIdDB INT OUTPUT,
+    @ErrorFromDB VARCHAR(255) OUTPUT
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    BEGIN TRY
 
         -- Update Tarjetas table
         UPDATE Tarjetas
@@ -270,4 +300,36 @@ BEGIN
         SET @ErrorFromDB = ERROR_MESSAGE();
     END CATCH;
 END
+/****** Object:  StoredProcedure [dbo].[insertar_usuario]    Script Date: 3/24/2024 11:15:34 AM ******/
+SET ANSI_NULLS ON
 GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[crear_orden]
+	(
+		@numeroCliente varchar(50),
+		@IdProducto varchar(50),
+		@Cantidad varchar(50),
+		@coordenadas varchar(255),
+		@totalComprar FLOAT,
+		@Activa bit,
+		@idOrden int output,
+		@errorIdDB int output,
+		@ErrorFromDB VARCHAR(255) output
+	)
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO Orden (numeroCliente, IdProducto, Cantidad, coordenadas, totalComprar, Activa)
+	Values(@numeroCliente,@IdProducto,@Cantidad,@coordenadas,@totalComprar,@Activa);
+
+        -- Capture the auto-generated ID and assign it to the @IdUser variable
+    SET @idOrden = SCOPE_IDENTITY();
+
+        -- Set error-related output parameters to default values
+    SET @errorIdDB = ERROR_NUMBER();
+    SET @ErrorFromDB = ERROR_MESSAGE();
+END 

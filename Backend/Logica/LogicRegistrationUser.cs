@@ -26,7 +26,6 @@ namespace ForoULAtina.Logica
                 res.Result = false;
                 //Instance of errors
                 res.Errors = new List<string>();
-                res.Id = 0;
                 //req.user.Status = true;
                 //Empty request
                 if (req == null)
@@ -116,7 +115,7 @@ namespace ForoULAtina.Logica
                     else
                     {
                         res.Result = true;
-                        res.Id = idUser;
+                        res.Message = "WELCOME! USER CREATED SUCCESSFULLY!";
                     }
                     
 

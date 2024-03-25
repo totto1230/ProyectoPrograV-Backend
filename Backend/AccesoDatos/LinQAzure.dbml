@@ -22,23 +22,56 @@
     <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.order_validate_number" Method="order_validate_number">
-    <Parameter Name="Number" Parameter="number" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="NumberO" Parameter="numberO" Type="System.String" DbType="NVarChar(255)" Direction="InOut" />
+  <Function Name="dbo.order_validate_product" Method="order_validate_product">
+    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Cantidad" Parameter="cantidad" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Existe" Parameter="existe" Type="System.Boolean" DbType="Bit" Direction="InOut" />
     <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="precio" Type="System.Decimal" DbType="Decimal(18,0)" Direction="InOut" />
     <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.actualizar_inventario" Method="actualizar_inventario">
-    <Parameter Name="numero" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="code" Type="System.String" DbType="VarChar(4)" />
-    <Parameter Name="expiration" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="totalComprar" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="cantidadProductos" Type="System.Int32" DbType="Int" />
     <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
     <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.actualizar_tarjeta" Method="actualizar_tarjeta">
+    <Parameter Name="numero" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="code" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="expiration" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="totalComprar" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.crear_orden" Method="crear_orden">
+    <Parameter Name="numeroCliente" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Cantidad" Parameter="cantidad" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="coordenadas" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="totalComprar" Type="System.Double" DbType="Float" />
+    <Parameter Name="Activa" Parameter="activa" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="idOrden" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.order_validate_number" Method="order_validate_number">
+    <Parameter Name="Number" Parameter="number" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="order_validate_numberResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TypeU" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
   <Function Name="dbo.order_validate_compra" Method="order_validate_compra">
     <Parameter Name="numero" Type="System.String" DbType="VarChar(255)" />
@@ -49,15 +82,5 @@
     <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.order_validate_product" Method="order_validate_product">
-    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Cantidad" Parameter="cantidad" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Existe" Parameter="existe" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Parameter Name="errorIdDB" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
-    <ElementType Name="order_validate_productResult">
-      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
   </Function>
 </Database>

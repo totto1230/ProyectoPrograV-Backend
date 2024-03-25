@@ -63,8 +63,9 @@ namespace ForoULAtina.Logica
                     else
                     {
                         res.Result = true;
+                        res.Message = "Welcome " + name + " !";
                     }
-                    res.Message = "Welcome " + name + " !";
+                    
                 }
 
             }

@@ -84,23 +84,52 @@ namespace ForoULAtina.AccesoDatos
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.order_validate_number")]
-		public int order_validate_number([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Number", DbType="VarChar(255)")] string number, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NumberO", DbType="NVarChar(255)")] ref string numberO, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.order_validate_product")]
+		public int order_validate_product([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cantidad", DbType="Int")] System.Nullable<int> cantidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Existe", DbType="Bit")] ref System.Nullable<bool> existe, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,0)")] ref System.Nullable<decimal> precio, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), number, numberO, errorIdDB, errorFromDB);
-			numberO = ((string)(result.GetParameterValue(1)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, cantidad, existe, errorIdDB, precio, errorFromDB);
+			existe = ((System.Nullable<bool>)(result.GetParameterValue(2)));
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			precio = ((System.Nullable<decimal>)(result.GetParameterValue(4)));
+			errorFromDB = ((string)(result.GetParameterValue(5)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.actualizar_inventario")]
+		public int actualizar_inventario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cantidadProductos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), cantidadProductos, idProducto, errorIdDB, errorFromDB);
 			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(2)));
 			errorFromDB = ((string)(result.GetParameterValue(3)));
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.actualizar_inventario")]
-		public int actualizar_inventario([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string numero, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4)")] string code, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> expiration, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,2)")] System.Nullable<decimal> totalComprar, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> cantidadProductos, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.actualizar_tarjeta")]
+		public int actualizar_tarjeta([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string numero, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(4)")] string code, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> expiration, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Decimal(18,2)")] System.Nullable<decimal> totalComprar, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numero, code, expiration, totalComprar, cantidadProductos, idProducto, errorIdDB, errorFromDB);
-			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(6)));
-			errorFromDB = ((string)(result.GetParameterValue(7)));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numero, code, expiration, totalComprar, errorIdDB, errorFromDB);
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(4)));
+			errorFromDB = ((string)(result.GetParameterValue(5)));
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.crear_orden")]
+		public int crear_orden([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string numeroCliente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="VarChar(50)")] string idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cantidad", DbType="VarChar(50)")] string cantidad, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string coordenadas, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Float")] System.Nullable<double> totalComprar, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Activa", DbType="Bit")] System.Nullable<bool> activa, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> idOrden, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), numeroCliente, idProducto, cantidad, coordenadas, totalComprar, activa, idOrden, errorIdDB, errorFromDB);
+			idOrden = ((System.Nullable<int>)(result.GetParameterValue(6)));
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(7)));
+			errorFromDB = ((string)(result.GetParameterValue(8)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.order_validate_number")]
+		public ISingleResult<order_validate_numberResult> order_validate_number([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Number", DbType="VarChar(255)")] string number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), number, errorIdDB, errorFromDB);
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorFromDB = ((string)(result.GetParameterValue(2)));
+			return ((ISingleResult<order_validate_numberResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.order_validate_compra")]
@@ -112,25 +141,43 @@ namespace ForoULAtina.AccesoDatos
 			errorFromDB = ((string)(result.GetParameterValue(6)));
 			return ((int)(result.ReturnValue));
 		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.order_validate_product")]
-		public ISingleResult<order_validate_productResult> order_validate_product([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cantidad", DbType="Int")] System.Nullable<int> cantidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Existe", DbType="Bit")] ref System.Nullable<bool> existe, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idProducto, cantidad, existe, errorIdDB, errorFromDB);
-			existe = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(3)));
-			errorFromDB = ((string)(result.GetParameterValue(4)));
-			return ((ISingleResult<order_validate_productResult>)(result.ReturnValue));
-		}
 	}
 	
-	public partial class order_validate_productResult
+	public partial class order_validate_numberResult
 	{
+		
+		private int _Id;
 		
 		private string _Name;
 		
-		public order_validate_productResult()
+		private string _Number;
+		
+		private string _Email;
+		
+		private string _Password;
+		
+		private char _TypeU;
+		
+		private bool _Status;
+		
+		public order_validate_numberResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
@@ -145,6 +192,86 @@ namespace ForoULAtina.AccesoDatos
 				if ((this._Name != value))
 				{
 					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Number", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Number
+		{
+			get
+			{
+				return this._Number;
+			}
+			set
+			{
+				if ((this._Number != value))
+				{
+					this._Number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(255)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this._Password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeU", DbType="Char(1) NOT NULL")]
+		public char TypeU
+		{
+			get
+			{
+				return this._TypeU;
+			}
+			set
+			{
+				if ((this._TypeU != value))
+				{
+					this._TypeU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL")]
+		public bool Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
 				}
 			}
 		}

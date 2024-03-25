@@ -8,10 +8,5 @@ namespace ForoULAtina.Entidades.Response
 {
     public class ResponseOrder : ResponseBase
     {
-        public string Message { get; set; }
-
-        public Boolean Valid { get; set; }
-
-        //public int idProducto { get; set; }
     }
 }

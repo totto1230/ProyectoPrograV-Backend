@@ -8,6 +8,5 @@ namespace ForoULAtina.Entidades.Response
 {
     public class ResponseLogin : ResponseBase
     {
-        public string Message { get; set; }
     }
 }

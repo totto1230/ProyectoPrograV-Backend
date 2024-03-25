@@ -8,20 +8,23 @@ namespace ForoULAtina.Entidades.Entities
 {
     public class Orden
     {
+        //NUMBER COMPRADOR
         public string Numero {  get; set; }
 
-        public int IdProducto { get; set;}
+        //PRODUCTO
+        public int[] IdProducto { get; set;}
 
-        public int Cantidad {  get; set; }
+        public int[] Cantidad {  get; set; }
 
+        public double[] coordenadas { get; set; }
+
+        //public double[] totalComprar { get; set; }
+
+        //Tarjeta
         public string NumeroTar { get; set; }
 
         public string code { get; set; }
 
         public DateTime expiration { get; set;}
-
-        //AGREGAR COORDENADAS
-        //BACKEND
-        public double totalComprar {get; set;}
     }
 }

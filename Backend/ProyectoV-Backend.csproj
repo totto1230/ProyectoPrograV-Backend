@@ -58,6 +58,7 @@
     <Compile Include="Entidades\Entities\Login.cs" />
     <Compile Include="Entidades\Entities\Orden.cs" />
     <Compile Include="Entidades\Entities\User.cs" />
+    <Compile Include="Logica\id\IdProductos.cs" />
     <Compile Include="Entidades\Request\RequestLogin.cs" />
     <Compile Include="Entidades\Request\RequestOrden.cs" />
     <Compile Include="Entidades\Request\RequestRegistation.cs" />

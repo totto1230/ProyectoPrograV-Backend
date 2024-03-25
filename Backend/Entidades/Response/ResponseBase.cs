@@ -10,5 +10,7 @@ namespace ForoULAtina.Entidades.Response
     {
         public Boolean Result { get; set; }
         public List<String> Errors { get; set; }
+
+        public string Message { get; set; }
     }
 }
