@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\API\obj\Debug\Package\PackageTmp" managedRuntimeVersion="v4.0" />
+  <setAcl path="D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\API\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\API\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>
