@@ -11,7 +11,7 @@ metadata:
   labels:
     app: api-prograV
   name: apis-proyecto
-  Namespace: epoch-mobile
+  namespace: epoch-mobile  # 'Namespace' should be lowercase
 spec:
   replicas: 2
   selector:
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: weather-api
+        app: api-prograV # 'app' label should match the selector
     spec:
       containers:
       - image: us-central1-docker.pkg.dev/proyecto-prograv/proyectoimagesapi/apis_proyecto:v1
@@ -34,7 +34,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: apis-proyecto-svc
-  Namespace: epoch-mobile
+  namespace: epoch-mobile  # 'Namespace' should be lowercase
   labels:
     app: api-prograV
 spec:
