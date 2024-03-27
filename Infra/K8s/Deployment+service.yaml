@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: epoch-mobile
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-prograV
+  name: apis-proyecto
+  Namespace: epoch-mobile
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-prograV
+  template:
+    metadata:
+      labels:
+        app: weather-api
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/proyecto-prograv/proyectoimagesapi/apis_proyecto:v1
+        name: apis-proyecto
+        ports:
+          - containerPort: 80 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: apis-proyecto-svc
+  Namespace: epoch-mobile
+  labels:
+    app: api-prograV
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: api-prograV
+  type: LoadBalancer
