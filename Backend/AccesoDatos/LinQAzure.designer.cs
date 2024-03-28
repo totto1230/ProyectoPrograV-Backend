@@ -163,6 +163,15 @@ namespace ForoULAtina.AccesoDatos
 			precio = ((System.Nullable<decimal>)(result.GetParameterValue(6)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.retornar_num_orden_activa")]
+		public ISingleResult<retornar_num_orden_activaResult> retornar_num_orden_activa([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CantidadActivas", DbType="Int")] ref System.Nullable<int> cantidadActivas)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorFromDB, cantidadActivas);
+			errorFromDB = ((string)(result.GetParameterValue(0)));
+			cantidadActivas = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			return ((ISingleResult<retornar_num_orden_activaResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class order_validate_numberResult
@@ -374,6 +383,194 @@ namespace ForoULAtina.AccesoDatos
 				if ((this._Precio != value))
 				{
 					this._Precio = value;
+				}
+			}
+		}
+	}
+	
+	public partial class retornar_num_orden_activaResult
+	{
+		
+		private int _idOrdenActiva;
+		
+		private System.Nullable<int> _idOrden;
+		
+		private string _numeroCliente;
+		
+		private string _numeroDriver;
+		
+		private string _IdProducto;
+		
+		private string _Cantidad;
+		
+		private string _coordenadas;
+		
+		private System.Nullable<double> _totalComprar;
+		
+		private System.Nullable<double> _costoViaje;
+		
+		private bool _completada;
+		
+		public retornar_num_orden_activaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOrdenActiva", DbType="Int NOT NULL")]
+		public int idOrdenActiva
+		{
+			get
+			{
+				return this._idOrdenActiva;
+			}
+			set
+			{
+				if ((this._idOrdenActiva != value))
+				{
+					this._idOrdenActiva = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idOrden", DbType="Int")]
+		public System.Nullable<int> idOrden
+		{
+			get
+			{
+				return this._idOrden;
+			}
+			set
+			{
+				if ((this._idOrden != value))
+				{
+					this._idOrden = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numeroCliente", DbType="VarChar(50)")]
+		public string numeroCliente
+		{
+			get
+			{
+				return this._numeroCliente;
+			}
+			set
+			{
+				if ((this._numeroCliente != value))
+				{
+					this._numeroCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numeroDriver", DbType="VarChar(50)")]
+		public string numeroDriver
+		{
+			get
+			{
+				return this._numeroDriver;
+			}
+			set
+			{
+				if ((this._numeroDriver != value))
+				{
+					this._numeroDriver = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="VarChar(50)")]
+		public string IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="VarChar(50)")]
+		public string Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this._Cantidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_coordenadas", DbType="VarChar(255)")]
+		public string coordenadas
+		{
+			get
+			{
+				return this._coordenadas;
+			}
+			set
+			{
+				if ((this._coordenadas != value))
+				{
+					this._coordenadas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_totalComprar", DbType="Float")]
+		public System.Nullable<double> totalComprar
+		{
+			get
+			{
+				return this._totalComprar;
+			}
+			set
+			{
+				if ((this._totalComprar != value))
+				{
+					this._totalComprar = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_costoViaje", DbType="Float")]
+		public System.Nullable<double> costoViaje
+		{
+			get
+			{
+				return this._costoViaje;
+			}
+			set
+			{
+				if ((this._costoViaje != value))
+				{
+					this._costoViaje = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_completada", DbType="Bit NOT NULL")]
+		public bool completada
+		{
+			get
+			{
+				return this._completada;
+			}
+			set
+			{
+				if ((this._completada != value))
+				{
+					this._completada = value;
 				}
 			}
 		}

@@ -38,8 +38,9 @@ CREATE TABLE Orden (
 	activa BIT NOT NULL
 );
 
-CREATE TABLE OrdenesAceptadasDriver (
-    idOrden INT IDENTITY(1,1) PRIMARY KEY,
+CREATE TABLE OrdenesActivas (
+    idOrdenActiva INT IDENTITY(1,1) PRIMARY KEY,
+	idOrden INT FOREIGN KEY REFERENCES Orden(idOrden),
     numeroCliente VARCHAR(50),
     numeroDriver VARCHAR(50),
     IdProducto VARCHAR(50),

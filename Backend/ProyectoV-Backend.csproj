@@ -61,9 +61,12 @@
     </Compile>
     <Compile Include="Entidades\Entities\Login.cs" />
     <Compile Include="Entidades\Entities\Orden.cs" />
+    <Compile Include="Entidades\Entities\OrdenActiva.cs" />
     <Compile Include="Entidades\Entities\Productos.cs" />
     <Compile Include="Entidades\Entities\User.cs" />
+    <Compile Include="Entidades\Request\RequestOrdenActiva.cs" />
     <Compile Include="Entidades\Request\RequestProductos.cs" />
+    <Compile Include="Entidades\Response\ResponseOrdenActiva.cs" />
     <Compile Include="Entidades\Response\ResponseProductos.cs" />
     <Compile Include="Logica\id\IdProductos.cs" />
     <Compile Include="Entidades\Request\RequestLogin.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Entidades\Response\ResponseOrder.cs" />
     <Compile Include="Entidades\Response\ResponseRegistration.cs" />
     <Compile Include="Logica\LogicLogin.cs" />
+    <Compile Include="Logica\LogicOrdenActiva.cs" />
     <Compile Include="Logica\LogicOrder.cs" />
     <Compile Include="Logica\LogicProductos.cs" />
     <Compile Include="Logica\LogicRegistrationUser.cs" />

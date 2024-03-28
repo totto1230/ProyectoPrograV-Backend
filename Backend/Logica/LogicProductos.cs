@@ -54,7 +54,7 @@ namespace ForoULAtina.Logica
                             j++;
                         }
                         res.Result = true;
-                        res.Message = "ENJOY YOUR PRODUCTS! " + res.productos.ToString();
+                        res.Message = "ENJOY YOUR PRODUCTS! ";
                     }
                     else
                     {

@@ -89,7 +89,8 @@ namespace ForoULAtina.Logica
                                     }
                                     else
                                     {
-                                        totalComprar = totalComprar + (precio * req.order.Cantidad[i]);
+                                        //150 driver
+                                        totalComprar = totalComprar + (precio * req.order.Cantidad[i]) + 150;
                                     }
                                 }
 
@@ -128,12 +129,22 @@ namespace ForoULAtina.Logica
                                         if (string.IsNullOrEmpty(ErrorFromDB))
                                         {
                                             int? idOrden = 0;
-                                            connect.crear_orden(req.order.Numero, req.order.IdProducto.ToString(), req.order.Cantidad.ToString(), req.order.coordenadas.ToString(), (double?)totalComprar, true, ref idOrden,ref  errorIdDB, ref ErrorFromDB);
 
-                                            if (string.IsNullOrEmpty(ErrorFromDB))
+                                            string convertedArrayId = string.Join(", ", req.order.IdProducto) , convertedArrayCantidad = string.Join(", ", req.order.Cantidad), convertedArrayCoords = string.Join(", ", req.order.coordenadas);
+
+                                            //Review IDProduct, not urgent
+                                            connect.crear_orden(req.order.Numero, convertedArrayId, convertedArrayCantidad, convertedArrayCoords, (double?)totalComprar, true, ref idOrden,ref  errorIdDB, ref ErrorFromDB);
+
+                                            if (idOrden!=0)
                                             {
-                                                res.Result = true;
-                                                res.Message = "ORDER PLACED SUCCESSFULLY!" + " If you have any issues, please provide us your order ID: " + (idOrden+35555).ToString();
+                                                //Revisar
+                                                connect.crear_orden_activa(idOrden, req.order.Numero, "1", convertedArrayId, convertedArrayCantidad, convertedArrayCoords, (double?)totalComprar, 150 ,false, ref ErrorFromDB);
+
+                                                if (string.IsNullOrEmpty(ErrorFromDB))
+                                                {
+                                                    res.Result = true;
+                                                    res.Message = "ORDER PLACED SUCCESSFULLY!" + " If you have any issues, please provide us your order ID: " + (idOrden + 35555).ToString() + " Total pagado: " + totalComprar.ToString();
+                                                }
                                             }
 
                                         }

@@ -423,3 +423,78 @@ BEGIN
 		SET @ErrorFromDB = 'No user found with the provided number.';
     END
 END
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+CREATE PROCEDURE crear_orden_driver
+(
+    @idOrden INT,
+    @numeroCliente VARCHAR(50),
+    @numeroDriver VARCHAR(50),
+    @IdProducto VARCHAR(50),
+    @Cantidad VARCHAR(50),
+    @coordenadas VARCHAR(255),
+    @totalComprar FLOAT,
+    @completada BIT,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    BEGIN TRY
+        INSERT INTO OrdenesAceptadasDriver (idOrden, numeroCliente, numeroDriver, IdProducto, Cantidad, coordenadas, totalComprar, completada)
+        VALUES (@idOrden, @numeroCliente, @numeroDriver, @IdProducto, @Cantidad, @coordenadas, @totalComprar, @completada);
+
+    END TRY
+    BEGIN CATCH
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END CATCH;
+END
+GO
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+CREATE PROCEDURE retornar_num_orden_activa
+(
+    -- Add the parameters for the stored procedure here
+	 @ErrorFromDB VARCHAR(255) output,
+	 @CantidadActivas int output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- Insert statements for procedure here
+    SELECT * from OrdenesActivas where completada = 0;
+
+	Set @CantidadActivas = @@ROWCOUNT;
+
+	IF @CantidadActivas < 1
+    BEGIN
+        -- Set error information
+        --SET @errorIdDB = 1  -- Assign an error code
+        SET @ErrorFromDB = 'No trips are currently available.'
+        RETURN  -- Exit the procedure
+    END
+END
+GO

@@ -103,4 +103,20 @@
     <Parameter Name="Precio" Parameter="precio" Type="System.Decimal" DbType="Decimal(18,0)" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.retornar_num_orden_activa" Method="retornar_num_orden_activa">
+    <Parameter Name="ErrorFromDB" Parameter="errorFromDB" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <Parameter Name="CantidadActivas" Parameter="cantidadActivas" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="retornar_num_orden_activaResult">
+      <Column Name="idOrdenActiva" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idOrden" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="numeroCliente" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="numeroDriver" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdProducto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cantidad" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="coordenadas" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="totalComprar" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="costoViaje" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="completada" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>

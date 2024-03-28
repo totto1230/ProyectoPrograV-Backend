@@ -336,6 +336,7 @@ END
 -- =======================================================
 -- Create Stored Procedure Template for Azure SQL Database
 -- =======================================================
+/****** Object:  StoredProcedure [dbo].[retornar_productos_disponibles]    Script Date: 3/27/2024 8:16:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,10 +346,15 @@ GO
 -- Create Date: <Create Date, , >
 -- Description: <Description, , >
 -- =============================================
-CREATE PROCEDURE retornar_productos_disponibles
+ALTER PROCEDURE [dbo].[retornar_productos_disponibles]
 (
+	 @filaNumber int,
 	 @errorIdDB int output,
-	 @ErrorFromDB VARCHAR(255) output
+	 @ErrorFromDB VARCHAR(255) output,
+	 @IdProducto int output,
+	 @Name VARCHAR(255) output,
+	 @Cantidad int output,
+	 @Precio decimal output
 )
 AS
 BEGIN
@@ -356,15 +362,104 @@ BEGIN
     -- interfering with SELECT statements.
     SET NOCOUNT ON
 
+	----            public int[] IdProducto { get; set; }
+ --           public string[] Name { get; set; }
+ --           public int[] Cantidad { get; set; }
+ --           public decimal[] Precio { get; set; }
     -- Insert statements for procedure here
-    SELECT idProducto, Name, Cantidad, Precio from Productos where Cantidad>0;
-	
+	SELECT @IdProducto AS idProducto, @Name AS Name, @Cantidad AS Cantidad, @Precio AS Precio
+	FROM (
+		SELECT idProducto, Name, Cantidad, Precio,
+			   ROW_NUMBER() OVER (ORDER BY idProducto) AS row_num
+		FROM Productos
+		WHERE Cantidad > 0
+	) AS numbered_rows
+	WHERE row_num = @filaNumber;
+
+
+
 	IF @@ROWCOUNT < 1
     BEGIN
         -- Set error information
-       --SET @errorIdDB = 1  -- Assign an error code
+        --SET @errorIdDB = 1  -- Assign an error code
         SET @ErrorFromDB = 'No products are currently available.'
         RETURN  -- Exit the procedure
     END
+END
+/****** Object:  StoredProcedure [dbo].[order_validate_number]    Script Date: 3/27/2024 8:51:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[order_validate_number]
+(
+	@Number varchar(255),
+	--@NumberO nvarchar(255) output,
+	@errorIdDB int output,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+	--SET @NumberO = NULL;
+	SET @errorIdDB = 0;
+	SET @ErrorFromDB = '';
+
+    -- Insert statements for procedure here
+    SELECT * --, @Status = Status
+	FROM Users 
+	WHERE Number = @Number AND Status = 1;
+
+	IF @@ROWCOUNT = 0
+    BEGIN
+        SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
+		SET @ErrorFromDB = 'No user found with the provided number.';
+    END
+END
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+CREATE PROCEDURE crear_orden_driver
+(
+    @idOrden INT,
+    @numeroCliente VARCHAR(50),
+    @numeroDriver VARCHAR(50),
+    @IdProducto VARCHAR(50),
+    @Cantidad VARCHAR(50),
+    @coordenadas VARCHAR(255),
+    @totalComprar FLOAT,
+    @completada BIT,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+    BEGIN TRY
+        INSERT INTO OrdenesAceptadasDriver (idOrden, numeroCliente, numeroDriver, IdProducto, Cantidad, coordenadas, totalComprar, completada)
+        VALUES (@idOrden, @numeroCliente, @numeroDriver, @IdProducto, @Cantidad, @coordenadas, @totalComprar, @completada);
+
+    END TRY
+    BEGIN CATCH
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END CATCH;
 END
 GO
