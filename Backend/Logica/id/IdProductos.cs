@@ -30,6 +30,23 @@ namespace ForoULAtina
             return idBackend;
         }
 
+        public int matchIDFs(int idBackend)
+        {
+            int idFronent = 0, i = 0, position = 0;
+
+            while (idBackendA.Length > i)
+            {
+                if (idBackendA[i] == idBackend)
+                {
+                    position = i;
+                    break;
+                }
+                i++;
+            }
+            idFronent = idFrontendA[position];
+
+            return idFronent;
+        }
     }
 
 }

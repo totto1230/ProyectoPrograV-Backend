@@ -142,13 +142,26 @@ namespace ForoULAtina.AccesoDatos
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.retornar_productos_disponibles")]
-		public ISingleResult<retornar_productos_disponiblesResult> retornar_productos_disponibles([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.retornar_num_productos")]
+		public ISingleResult<retornar_num_productosResult> retornar_num_productos([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CantidadProductos", DbType="Int")] ref System.Nullable<int> cantidadProductos)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorIdDB, errorFromDB);
-			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(0)));
-			errorFromDB = ((string)(result.GetParameterValue(1)));
-			return ((ISingleResult<retornar_productos_disponiblesResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), errorFromDB, cantidadProductos);
+			errorFromDB = ((string)(result.GetParameterValue(0)));
+			cantidadProductos = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			return ((ISingleResult<retornar_num_productosResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.retornar_productos_disponibles")]
+		public int retornar_productos_disponibles([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> filaNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> errorIdDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ErrorFromDB", DbType="VarChar(255)")] ref string errorFromDB, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] ref System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="VarChar(255)")] ref string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cantidad", DbType="Int")] ref System.Nullable<int> cantidad, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Precio", DbType="Decimal(18,0)")] ref System.Nullable<decimal> precio)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), filaNumber, errorIdDB, errorFromDB, idProducto, name, cantidad, precio);
+			errorIdDB = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			errorFromDB = ((string)(result.GetParameterValue(2)));
+			idProducto = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			name = ((string)(result.GetParameterValue(4)));
+			cantidad = ((System.Nullable<int>)(result.GetParameterValue(5)));
+			precio = ((System.Nullable<decimal>)(result.GetParameterValue(6)));
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -286,7 +299,7 @@ namespace ForoULAtina.AccesoDatos
 		}
 	}
 	
-	public partial class retornar_productos_disponiblesResult
+	public partial class retornar_num_productosResult
 	{
 		
 		private int _idProducto;
@@ -297,7 +310,7 @@ namespace ForoULAtina.AccesoDatos
 		
 		private decimal _Precio;
 		
-		public retornar_productos_disponiblesResult()
+		public retornar_num_productosResult()
 		{
 		}
 		

@@ -1,0 +1,10 @@
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.csproj.AssemblyReference.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.GeneratedMSBuildEditorConfig.editorconfig
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.AssemblyInfoInputs.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.AssemblyInfo.cs
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.csproj.CoreCompileInputs.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.MvcApplicationPartsAssemblyInfo.cs
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.MvcApplicationPartsAssemblyInfo.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.sourcelink.json
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.RazorAssemblyInfo.cache
+D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\ProyectoV-API-Proyecto\obj\Debug\net8.0\ProyectoV-API-Proyecto.RazorAssemblyInfo.cs

@@ -23,7 +23,7 @@ spec:
         app: api-prograV # 'app' label should match the selector
     spec:
       containers:
-      - image: us-central1-docker.pkg.dev/proyecto-prograv/proyectoimagesapi/apis_proyecto:v1
+      - image: us-central1-docker.pkg.dev/proyecto-prograv/proyectoimagesapi/apis_proyecto
         name: apis-proyecto
         ports:
           - containerPort: 80 

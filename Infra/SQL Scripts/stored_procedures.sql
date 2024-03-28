@@ -1,0 +1,425 @@
+
+---STORED PROCEDURES
+--CREAR USUARIOS
+--CREAR USUARIOS
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[insertar_usuario]
+	(
+		@Name varchar(255),
+		@Number varchar(255),
+		@Email varchar(255),
+		@Password varchar(255),
+		@TypeU char,
+		@Status bit,
+		@IdUser int output,
+		@errorIdDB int output,
+		@ErrorFromDB VARCHAR(255) output
+	)
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Insert Into Users(Name,Number,Email,Password,TypeU, Status)	
+	Values(@Name,@Number,@Email,@Password,@TypeU,@Status)
+
+        -- Capture the auto-generated ID and assign it to the @IdUser variable
+    SET @IdUser = SCOPE_IDENTITY();
+
+        -- Set error-related output parameters to default values
+    SET @errorIdDB = ERROR_NUMBER();
+    SET @ErrorFromDB = ERROR_MESSAGE();
+END 
+
+
+--LOGIN
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Alter PROCEDURE [dbo].[login]
+	(
+	 @Number nvarchar(50),
+	 @Password nvarchar(50),
+	 @Name nvarchar(255) output,
+	 @Status bit output,
+	 @TypeU bit output,
+	 @errorIdDB int output,
+	 @ErrorFromDB VARCHAR(255) output
+	)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	-- Initialize output parameters
+	SET @Name = NULL;
+	SET @errorIdDB = 0;
+	SET @ErrorFromDB = '';
+
+	-- Retrieve the name if the number, password, and status are fine
+	SELECT @Name = Name --, @Status = Status
+	FROM Users 
+	WHERE Number = @Number AND Password = @Password AND Status = 1;
+
+	-- Check if no records found
+	IF @Name IS NULL
+	BEGIN
+		SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
+		SET @ErrorFromDB = 'No user found with the provided credentials.';
+	END
+	--IF @Status = 0
+	--BEGIN
+	--	SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
+	--	SET @ErrorFromDB = 'The user is not active';
+	--END
+	
+END
+GO
+
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+/****** Object:  StoredProcedure [dbo].[order_validate_number]    Script Date: 3/23/2024 2:32:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[order_validate_number]
+(
+	@Number varchar(255),
+	--@NumberO nvarchar(255) output,
+	@errorIdDB int output,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+	--SET @NumberO = NULL;
+	SET @errorIdDB = 0;
+	SET @ErrorFromDB = '';
+
+    -- Insert statements for procedure here
+    SELECT Number = @Number --, @Status = Status
+	FROM Users 
+	WHERE Number = @Number AND Status = 1;
+
+	IF @@ROWCOUNT = 0
+    BEGIN
+        SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
+		SET @ErrorFromDB = 'No user found with the provided number.';
+    END
+END
+
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+/****** Object:  StoredProcedure [dbo].[order_validate_product]    Script Date: 3/17/2024 7:58:41 PM ******/
+/****** Object:  StoredProcedure [dbo].[order_validate_product]    Script Date: 3/23/2024 3:18:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[order_validate_product]
+    -- Add the parameters for the stored procedure her
+(
+	@IdProducto int,
+	@Cantidad int,
+	@Existe bit output,
+	@errorIdDB int output,
+	@precio decimal output,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+	SET @Existe = 0;
+	SET @errorIdDB = 0;
+	SET @ErrorFromDB = '';
+
+	SELECT @precio = Precio
+	FROM Productos
+	WHERE idProducto = @IdProducto AND Cantidad >= @Cantidad;
+
+ IF @@ROWCOUNT > 0
+    BEGIN
+        SET @Existe = 1;
+    END
+    ELSE
+    BEGIN
+        -- No rows were returned, set @Existe to 0 and capture error information
+        SET @Existe = 0;
+        SET @errorIdDB = ERROR_NUMBER();
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+CREATE PROCEDURE order_validate_compra
+(
+    @numero VARCHAR(255),
+    @code VARCHAR(4),
+    @expiration DATE,
+    @totalComprar DECIMAL(18, 2),
+    @ValidarCompra BIT OUTPUT,
+    @errorIdDB INT OUTPUT,
+    @ErrorFromDB VARCHAR(255) OUTPUT
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    -- Initialize output parameters
+    SET @ValidarCompra = 0;
+    SET @errorIdDB = 0;
+    SET @ErrorFromDB = '';
+
+    -- Check if the card details are valid and sufficient funds are available
+    IF EXISTS (
+        SELECT idTarjeta
+        FROM Tarjetas
+        WHERE numero = @numero
+          AND code = @code
+          AND expiration = @expiration
+          AND expiration > GETDATE()
+          AND dinero >= @totalComprar
+    )
+    BEGIN
+        SET @ValidarCompra = 1;
+    END
+    ELSE
+    BEGIN
+        -- Capture error information
+        SET @errorIdDB = ERROR_NUMBER();
+        SET @ErrorFromDB = 'REVIEW YOUR CARD, CODE, EXPIRATION AND MAKE SURE YOU HAVE MONEY AVAILABLE!';
+    END
+END
+/****** Object:  StoredProcedure [dbo].[actualizar_inventario]    Script Date: 3/23/2024 3:26:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[actualizar_inventario]
+(
+    @cantidadProductos INT,
+    @IdProducto INT,
+    @errorIdDB INT OUTPUT,
+    @ErrorFromDB VARCHAR(255) OUTPUT
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        -- Update Productos table
+        UPDATE Productos
+        SET Cantidad = (Cantidad - @cantidadProductos)
+        WHERE IdProducto = @IdProducto;
+    END TRY
+    BEGIN CATCH
+        -- Capture error information
+        SET @errorIdDB = ERROR_NUMBER();
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END CATCH;
+END
+
+/****** Object:  StoredProcedure [dbo].[actualizar_inventario]    Script Date: 3/23/2024 3:26:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+Create PROCEDURE [dbo].[actualizar_tarjeta]
+(
+    @numero VARCHAR(255),
+    @code VARCHAR(4),
+    @expiration DATE,
+    @totalComprar DECIMAL(18, 2),
+    @errorIdDB INT OUTPUT,
+    @ErrorFromDB VARCHAR(255) OUTPUT
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+
+        -- Update Tarjetas table
+        UPDATE Tarjetas
+        SET dinero = (dinero - @totalComprar)
+        WHERE numero = @numero
+          AND code = @code
+          AND expiration = @expiration;
+    END TRY
+    BEGIN CATCH
+        -- Capture error information
+        SET @errorIdDB = ERROR_NUMBER();
+        SET @ErrorFromDB = ERROR_MESSAGE();
+    END CATCH;
+END
+/****** Object:  StoredProcedure [dbo].[insertar_usuario]    Script Date: 3/24/2024 11:15:34 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[crear_orden]
+	(
+		@numeroCliente varchar(50),
+		@IdProducto varchar(50),
+		@Cantidad varchar(50),
+		@coordenadas varchar(255),
+		@totalComprar FLOAT,
+		@Activa bit,
+		@idOrden int output,
+		@errorIdDB int output,
+		@ErrorFromDB VARCHAR(255) output
+	)
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO Orden (numeroCliente, IdProducto, Cantidad, coordenadas, totalComprar, Activa)
+	Values(@numeroCliente,@IdProducto,@Cantidad,@coordenadas,@totalComprar,@Activa);
+
+        -- Capture the auto-generated ID and assign it to the @IdUser variable
+    SET @idOrden = SCOPE_IDENTITY();
+
+        -- Set error-related output parameters to default values
+    SET @errorIdDB = ERROR_NUMBER();
+    SET @ErrorFromDB = ERROR_MESSAGE();
+END 
+-- =======================================================
+-- Create Stored Procedure Template for Azure SQL Database
+-- =======================================================
+/****** Object:  StoredProcedure [dbo].[retornar_productos_disponibles]    Script Date: 3/27/2024 8:16:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[retornar_productos_disponibles]
+(
+	 @filaNumber int,
+	 @errorIdDB int output,
+	 @ErrorFromDB VARCHAR(255) output,
+	 @IdProducto int output,
+	 @Name VARCHAR(255) output,
+	 @Cantidad int output,
+	 @Precio decimal output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+
+	----            public int[] IdProducto { get; set; }
+ --           public string[] Name { get; set; }
+ --           public int[] Cantidad { get; set; }
+ --           public decimal[] Precio { get; set; }
+    -- Insert statements for procedure here
+	SELECT @IdProducto AS idProducto, @Name AS Name, @Cantidad AS Cantidad, @Precio AS Precio
+	FROM (
+		SELECT idProducto, Name, Cantidad, Precio,
+			   ROW_NUMBER() OVER (ORDER BY idProducto) AS row_num
+		FROM Productos
+		WHERE Cantidad > 0
+	) AS numbered_rows
+	WHERE row_num = @filaNumber;
+
+
+
+	IF @@ROWCOUNT < 1
+    BEGIN
+        -- Set error information
+        --SET @errorIdDB = 1  -- Assign an error code
+        SET @ErrorFromDB = 'No products are currently available.'
+        RETURN  -- Exit the procedure
+    END
+END
+/****** Object:  StoredProcedure [dbo].[order_validate_number]    Script Date: 3/27/2024 8:51:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:      <Author, , Name>
+-- Create Date: <Create Date, , >
+-- Description: <Description, , >
+-- =============================================
+ALTER PROCEDURE [dbo].[order_validate_number]
+(
+	@Number varchar(255),
+	--@NumberO nvarchar(255) output,
+	@errorIdDB int output,
+	@ErrorFromDB VARCHAR(255) output
+)
+AS
+BEGIN
+    -- SET NOCOUNT ON added to prevent extra result sets from
+    -- interfering with SELECT statements.
+    SET NOCOUNT ON
+	--SET @NumberO = NULL;
+	SET @errorIdDB = 0;
+	SET @ErrorFromDB = '';
+
+    -- Insert statements for procedure here
+    SELECT * --, @Status = Status
+	FROM Users 
+	WHERE Number = @Number AND Status = 1;
+
+	IF @@ROWCOUNT = 0
+    BEGIN
+        SET @errorIdDB = ERROR_NUMBER(); -- or any appropriate error code
+		SET @ErrorFromDB = 'No user found with the provided number.';
+    END
+END

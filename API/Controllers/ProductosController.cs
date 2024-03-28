@@ -15,10 +15,10 @@ namespace API.Controllers
     {
 		[System.Web.Http.HttpGet]
 		[System.Web.Http.Route("api/Productos/obtener")]
-		public ResponseProductos VerProductos(RequestProductos req)
+		public ResponseProductos VerProductos()
 		{
             LogicProductos logicaBackend = new LogicProductos();
-			return logicaBackend.ValidateProduct(null);
+			return logicaBackend.ValidateProduct();
 		}
     }
 }
