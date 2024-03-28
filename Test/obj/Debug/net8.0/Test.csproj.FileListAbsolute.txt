@@ -1,9 +1,0 @@
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.csproj.AssemblyReference.cache
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.GeneratedMSBuildEditorConfig.editorconfig
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.AssemblyInfoInputs.cache
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.AssemblyInfo.cs
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.csproj.CoreCompileInputs.cache
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.MvcApplicationPartsAssemblyInfo.cache
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.RazorAssemblyInfo.cache
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.RazorAssemblyInfo.cs
-D:\ULATINA\10 CUATRI\Progra V\Proyecto_Backend\ProyectoPrograV-Backend\Test\obj\Debug\net8.0\Test.sourcelink.json
